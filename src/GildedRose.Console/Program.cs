@@ -124,10 +124,6 @@
             {
                 return this.Item.Name;
             }
-            set
-            {
-                this.Item.Name = value;
-            }
         }
 
         public int SellIn
