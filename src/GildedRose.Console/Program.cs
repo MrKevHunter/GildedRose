@@ -58,7 +58,7 @@
             }
         }
 
-        private static void DecreaseSellInValue(ItemWrapper item)
+        private static void DecreaseSellInValue(ItemDecorator item)
         {
             if (item.Name != SulfurasHandOfRagnaros)
             {
@@ -66,7 +66,7 @@
             }
         }
 
-        private static void ProcessOutOfDateItems(ItemWrapper item, Item i)
+        private static void ProcessOutOfDateItems(ItemDecorator item, Item i)
         {
             if (item.SellIn < 0)
             {

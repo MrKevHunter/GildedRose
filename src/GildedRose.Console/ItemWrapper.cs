@@ -6,7 +6,7 @@ namespace GildedRose.Console
     {
         private int MaximumQuality = 50;
 
-        public Item Item { get; }
+        public ItemDecorator Item { get; }
 
         public string Name => this.Item.Name;
 
@@ -39,19 +39,6 @@ namespace GildedRose.Console
             if (this.Name == Program.AgedBrie || this.Name == Program.BackstagePassesToATafkal80EtcConcert)
             {
                 this.Quality = this.Quality + 1;
-
-                if (this.Name == Program.BackstagePassesToATafkal80EtcConcert)
-                {
-                    if (this.SellIn < 11)
-                    {
-                        this.Quality = this.Quality + 1;
-                    }
-
-                    if (this.SellIn < 6)
-                    {
-                        this.Quality = this.Quality + 1;
-                    }
-                }
             }
             else
             {
@@ -65,7 +52,12 @@ namespace GildedRose.Console
             }
         }
 
-        public ItemWrapper(Item item)
+        public ItemDecorator(Item item)
+        {
+            this.Item = new ItemDecorator(item);
+        }
+
+        public ItemDecorator(ItemDecorator item)
         {
             this.Item = item;
         }
