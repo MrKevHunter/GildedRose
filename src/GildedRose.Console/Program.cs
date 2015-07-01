@@ -48,129 +48,52 @@
         {
             foreach (var i in this.Items)
             {
-                ItemWrapper item = WrapperFactory.Create(i);
-                if (item.Name == AgedBrie || item.Name == BackstagePassesToATafkal80EtcConcert)
-                {
-                    item.Quality = item.Quality + 1;
+                var item = WrapperFactory.Create(i);
 
-                    if (item.Name == BackstagePassesToATafkal80EtcConcert)
+                item.AdjustQuality();
+
+                DecreaseSellInValue(item);
+
+                ProcessOutOfDateItems(item, i);
+            }
+        }
+
+        private static void DecreaseSellInValue(ItemWrapper item)
+        {
+            if (item.Name != SulfurasHandOfRagnaros)
+            {
+                item.SellIn = item.SellIn - 1;
+            }
+        }
+
+        private static void ProcessOutOfDateItems(ItemWrapper item, Item i)
+        {
+            if (item.SellIn < 0)
+            {
+                if (item.Name != AgedBrie)
+                {
+                    if (item.Name != BackstagePassesToATafkal80EtcConcert)
                     {
-                        if (item.SellIn < 11)
+                        if (item.Quality > 0)
                         {
-                            item.Quality = item.Quality + 1;
-                        }
-
-                        if (item.SellIn < 6)
-                        {
-                            item.Quality = item.Quality + 1;
-                        }
-                    }
-                }
-                else
-                {
-                    if (item.Quality > 0)
-                    {
-                        if (item.Name != SulfurasHandOfRagnaros)
-                        {
-                            item.Quality = item.Quality - 1;
-                        }
-                    }
-                }
-
-                if (item.Name != SulfurasHandOfRagnaros)
-                {
-                    item.SellIn = item.SellIn - 1;
-                }
-
-                if (item.SellIn < 0)
-                {
-                    if (item.Name != AgedBrie)
-                    {
-                        if (item.Name != BackstagePassesToATafkal80EtcConcert)
-                        {
-                            if (item.Quality > 0)
+                            if (item.Name != SulfurasHandOfRagnaros)
                             {
-                                if (item.Name != SulfurasHandOfRagnaros)
-                                {
-                                    item.Quality = item.Quality - 1;
-                                }
+                                item.Quality = item.Quality - 1;
                             }
-                        }
-                        else
-                        {
-                            item.Quality = item.Quality - item.Quality;
                         }
                     }
                     else
                     {
-                        item.Quality = item.Quality + 1;
+                        item.Quality = item.Quality - item.Quality;
                     }
-                    i.Quality = item.Item.Quality;
-                    i.SellIn = item.SellIn;
                 }
+                else
+                {
+                    item.Quality = item.Quality + 1;
+                }
+                i.Quality = item.Item.Quality;
+                i.SellIn = item.SellIn;
             }
         }
-    }
-
-    public class ItemWrapper
-    {
-        private int MaximumQuality = 50;
-
-        public Item Item { get; }
-
-        public string Name
-        {
-            get
-            {
-                return this.Item.Name;
-            }
-        }
-
-        public int SellIn
-        {
-            get
-            {
-                return this.Item.SellIn;
-            }
-            set
-            {
-                this.Item.SellIn = value;
-            }
-        }
-
-        public int Quality
-        {
-            get
-            {
-                return this.Item.Quality;
-            }
-            set
-            {
-                this.Item.Quality = Math.Min(value,MaximumQuality);
-            }
-        }
-
-        public ItemWrapper(Item item)
-        {
-            this.Item = item;
-        }
-    }
-
-    public class WrapperFactory
-    {
-        public static ItemWrapper Create(Item item)
-        {
-            return new ItemWrapper(item);
-        }
-    }
-
-    public class Item
-    {
-        public string Name { get; set; }
-
-        //Number of time periods to sell in
-        public int SellIn { get; set; }
-
-        public int Quality { get; set; }
     }
 }
