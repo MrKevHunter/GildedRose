@@ -9,6 +9,10 @@
             {
                 return new ConcertTicket(itemWrapper);
             }
+            if (item.Name==Program.AgedBrie)
+            {
+                return  new CheeseThatAgesWell(itemWrapper);
+            }
             return itemWrapper;
         }
     }
@@ -30,7 +34,7 @@
             base.AdjustQuality();
         }
 
-        public ConcertTicket(ItemDecorator item)
+        public ConcertTicket(Item item)
             : base(item)
         {
         }
@@ -40,20 +44,11 @@
     {
         public override void AdjustQuality()
         {
-
-            if (this.SellIn < 11)
-            {
-                this.Quality = this.Quality + 1;
-            }
-
-            if (this.SellIn < 6)
-            {
-                this.Quality = this.Quality + 1;
-            }
+            this.Quality = this.Quality + 1;
             base.AdjustQuality();
         }
 
-        public ConcertTicket(ItemDecorator item)
+        public CheeseThatAgesWell(Item item)
             : base(item)
         {
         }
