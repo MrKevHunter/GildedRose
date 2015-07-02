@@ -8,7 +8,7 @@ namespace GildedRose.Tests
 
     using Shouldly;
 
-    public class CharictarisationTests
+    public class CharacterizationTests
     {
         [Fact]
         public void Given_a_vest_When_processed_the_amount_should_reduce_by_one()

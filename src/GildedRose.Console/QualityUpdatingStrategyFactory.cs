@@ -12,14 +12,23 @@ namespace GildedRose.Console
                 { ProductNameConstants.BackstagePassesToATafkal80EtcConcert,()=>new BackStagePassesStrategy() },
                 { ProductNameConstants.SulfurasHandOfRagnaros,()=>new SulfurasHandOfRagnarosStrategy() }
             };
-        public IQualityUpdatingStrategy Create(ItemWrapper item)
+        public IQualityUpdatingStrategy Create(ItemWrapper item,bool isConjuredItem = false)
         {
+            if (isConjuredItem)
+            {
+                return new ConjuredItemStrategy();
+            }
             if (strategies.ContainsKey(item.Name))
             {
                 return strategies[item.Name]();
             }
             return new DefaultQualityUpdatingStrategy();
         }
+    }
+
+    public class ConjuredItemStrategy : DefaultQualityUpdatingStrategy
+    {
+        protected override int QualityDecreaser => 2;
     }
 
     internal class SulfurasHandOfRagnarosStrategy : IQualityUpdatingStrategy

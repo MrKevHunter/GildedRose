@@ -1,23 +1,26 @@
-using GildedRose.Console;
-
-public class DefaultQualityUpdatingStrategy : IQualityUpdatingStrategy
+namespace GildedRose.Console
 {
-    public ItemWrapper UpdateQuality(ItemWrapper item)
+    public class DefaultQualityUpdatingStrategy : IQualityUpdatingStrategy
     {
-        if (item.Quality > 0)
-        {
-            item.Quality = item.Quality - 1;
-        }
+        protected virtual int QualityDecreaser => 1;
 
-        item.SellIn = item.SellIn - 1;
-
-        if (item.SellIn < 0)
+        public ItemWrapper UpdateQuality(ItemWrapper item)
         {
             if (item.Quality > 0)
             {
-                item.Quality = item.Quality - 1;
+                item.Quality = item.Quality - QualityDecreaser;
             }
+
+            item.SellIn = item.SellIn - 1;
+
+            if (item.SellIn < 0)
+            {
+                if (item.Quality > 0)
+                {
+                    item.Quality = item.Quality - QualityDecreaser;
+                }
+            }
+            return item;
         }
-        return item;
     }
 }
