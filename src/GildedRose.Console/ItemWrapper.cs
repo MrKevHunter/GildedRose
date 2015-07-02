@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 namespace GildedRose.Console
 {
     using System;
@@ -7,6 +8,17 @@ namespace GildedRose.Console
         private int MaximumQuality = 50;
 
         public ItemDecorator Item { get; }
+=======
+﻿using System;
+
+namespace GildedRose.Console
+{
+    public class ItemWrapper
+    {
+        private int MaximumQuality = 50;
+
+        public Item Item { get; }
+>>>>>>> strategyimp
 
         public string Name => this.Item.Name;
 
@@ -30,6 +42,7 @@ namespace GildedRose.Console
             }
             set
             {
+<<<<<<< HEAD
                 this.Item.Quality = Math.Max(Math.Min(value,this.MaximumQuality),0);
             }
         }
@@ -58,6 +71,13 @@ namespace GildedRose.Console
         }
 
         public ItemDecorator(ItemDecorator item)
+=======
+                this.Item.Quality = Math.Min(value,MaximumQuality);
+            }
+        }
+
+        public ItemWrapper(Item item)
+>>>>>>> strategyimp
         {
             this.Item = item;
         }

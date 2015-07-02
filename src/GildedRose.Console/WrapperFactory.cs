@@ -2,6 +2,7 @@
 {
     public class WrapperFactory
     {
+<<<<<<< HEAD
         public static ItemDecorator Create(Item item)
         {
             var itemWrapper = new ItemDecorator(item);
@@ -56,6 +57,11 @@
         public ConcertTicket(ItemDecorator item)
             : base(item)
         {
+=======
+        public static ItemWrapper Create(Item item)
+        {
+            return new ItemWrapper(item);
+>>>>>>> strategyimp
         }
     }
 }

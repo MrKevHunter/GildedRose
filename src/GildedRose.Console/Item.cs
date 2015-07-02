@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 ﻿namespace GildedRose.Console
+=======
+namespace GildedRose.Console
+>>>>>>> strategyimp
 {
     public class Item
     {

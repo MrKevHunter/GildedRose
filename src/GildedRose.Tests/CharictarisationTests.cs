@@ -43,11 +43,11 @@ namespace GildedRose.Tests
         [Fact]
         public void Given_ragnoros_hand_When_processed_the_amount_should_reduce_by_one()
         {
-            Program sut = new Program { Items = new List<Item> { new Item { Name = "Sulfuras, Hand of Ragnaros", SellIn = 0, Quality = 80 } } };
+            Program sut = new Program { Items = new List<Item> { new Item { Name = "Sulfuras, Hand of Ragnaros", SellIn = 0, Quality = 50 } } };
             sut.UpdateQuality();
             sut.Items[0].Name.ShouldBe("Sulfuras, Hand of Ragnaros");
             sut.Items[0].SellIn.ShouldBe(0);
-            sut.Items[0].Quality.ShouldBe(80);
+            sut.Items[0].Quality.ShouldBe(50);
         }
 
         [Fact]

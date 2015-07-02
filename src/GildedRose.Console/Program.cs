@@ -1,53 +1,18 @@
-﻿namespace GildedRose.Console
-{
-    using System;
-    using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
+namespace GildedRose.Console
+{
     public class Program
     {
-        public const string AgedBrie = "Aged Brie";
-
-        public const string DexterityVest = "+5 Dexterity Vest";
-
-        public const string ElixirOfTheMongoose = "Elixir of the Mongoose";
-
-        public const string SulfurasHandOfRagnaros = "Sulfuras, Hand of Ragnaros";
-
-        public const string BackstagePassesToATafkal80EtcConcert = "Backstage passes to a TAFKAL80ETC concert";
-
-        public const string ConjuredManaCake = "Conjured Mana Cake";
-
         public IList<Item> Items;
 
         private static void Main(string[] args)
         {
-            Console.WriteLine("OMGHAI!");
+            System.Console.WriteLine("OMGHAI!");
 
             var app = new Program
-                          {
-                              Items =
-                                  new List<Item>
-                                      {
-                                          new Item { Name = DexterityVest, SellIn = 10, Quality = 20 },
-                                          new Item { Name = AgedBrie, SellIn = 2, Quality = 0 },
-                                          new Item { Name = ElixirOfTheMongoose, SellIn = 5, Quality = 7 },
-                                          new Item { Name = SulfurasHandOfRagnaros, SellIn = 0, Quality = 80 },
-                                          new Item { Name = BackstagePassesToATafkal80EtcConcert, SellIn = 15, Quality = 20 },
-                                          new Item { Name = ConjuredManaCake, SellIn = 3, Quality = 6 }
-                                      }
-                          };
-
-            app.UpdateQuality();
-
-            Console.ReadKey();
-        }
-
-       
-
-        public void UpdateQuality()
-        {
-            foreach (var i in this.Items)
             {
+<<<<<<< HEAD
                 var item = WrapperFactory.Create(i);
 
                 item.AdjustQuality();
@@ -92,6 +57,38 @@
                     item.Quality = item.Quality + 1;
                 }
                 i.Quality = item.Item.Quality;
+=======
+                Items =
+                    new List<Item>
+                    {
+                        new Item {Name = ProductNameConstants.DexterityVest, SellIn = 10, Quality = 20},
+                        new Item {Name = ProductNameConstants.AgedBrie, SellIn = 2, Quality = 0},
+                        new Item {Name = ProductNameConstants.ElixirOfTheMongoose, SellIn = 5, Quality = 7},
+                        new Item {Name = ProductNameConstants.SulfurasHandOfRagnaros, SellIn = 0, Quality = 80},
+                        new Item
+                        {
+                            Name = ProductNameConstants.BackstagePassesToATafkal80EtcConcert,
+                            SellIn = 15,
+                            Quality = 20
+                        },
+                        new Item {Name = ProductNameConstants.ConjuredManaCake, SellIn = 3, Quality = 6}
+                    }
+            };
+
+            app.UpdateQuality();
+
+            System.Console.ReadKey();
+        }
+
+        public void UpdateQuality()
+        {
+            foreach (var i in Items)
+            {
+                var item = WrapperFactory.Create(i);
+                var qualityUpdatingStrategy = new QualityUpdatingStrategyFactory().Create(item);
+                item = qualityUpdatingStrategy.UpdateQuality(item);
+                i.Quality = item.Quality;
+>>>>>>> strategyimp
                 i.SellIn = item.SellIn;
             }
         }
